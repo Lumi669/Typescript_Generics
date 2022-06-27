@@ -15,10 +15,9 @@
 
 //demonstration generic function
 
-function merge<T, U>(objA: T, objB: U) {
+//add generic constraints
+function merge<T extends object, U extends object>(objA: T, objB: U) {
   return Object.assign(objA, objB);
 }
 const mergedObj = merge({ name: "rose" }, { age: 6 });
-const mergedObj2 = merge({ name: "rose" }, [1, 2, 3]);
 console.log("mergedObj = ", mergedObj);
-console.log("mergedObj2 = ", mergedObj2); //{0: 1, 1: 2, 2: 3, name: "rose"}
