@@ -19,6 +19,6 @@ console.log(countAndDescribe([2, 1, 4, 5, 6]));
 function extractAndConvert(obj, key) {
     return obj[key];
 }
-const aa = extractAndConvert({ name: "orvokki" }, "name");
+const aa = extractAndConvert({ name: "orvoki" }, "name");
 console.log("aa = ", aa);
 //# sourceMappingURL=app.js.map
