@@ -14,7 +14,6 @@
 // });
 
 //demonstration  a generic function
-
 //using type casting to get rid of error on Line31
 function merge(objA: object, objB: object) {
   return Object.assign(objA, objB) as { name: string; age: number };
@@ -27,5 +26,3 @@ function merge(objA: object, objB: object) {
 
 const mergedObj = merge({ name: "rose" }, { age: 90 });
 console.log("mergedObj = ", mergedObj);
-
-mergedObj.age;
