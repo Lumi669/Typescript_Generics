@@ -1,8 +1,8 @@
 "use strict";
-const names = [];
-const promise = new Promise((resolve) => {
-    setTimeout(() => {
-        resolve("This is done.");
-    }, 2000);
-});
+function merge(objA, objB) {
+    return Object.assign(objA, objB);
+}
+const mergedObj = merge({ name: "rose" }, { age: 90 });
+console.log("mergedObj = ", mergedObj);
+mergedObj.age;
 //# sourceMappingURL=app.js.map
