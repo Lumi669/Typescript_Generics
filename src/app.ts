@@ -27,7 +27,8 @@ interface Lengthy {
   length: number;
 }
 
-function countAndDescribe<T extends Lengthy>(element: T) {
+//set specificlly the return type to a tuple and its two element types
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
   let descriptionText = "Got no value";
   if (element.length === 1) {
     descriptionText = "Got 1 element.";
@@ -39,3 +40,11 @@ function countAndDescribe<T extends Lengthy>(element: T) {
 
 console.log(countAndDescribe("hello rose")); //["hello rose", "Got 10 elements."]
 console.log(countAndDescribe([2, 1, 4, 5, 6])); //[[2, 1, 4, 5, 6], "Got 5 elements."]
+
+//keyof constraint in generic function
+function extractAndConvert(obj: { name: string }, key: keyof typeof obj) {
+  return obj[key];
+}
+
+const aa = extractAndConvert({ name: "orvokki" }, "name");
+console.log("aa = ", aa);
