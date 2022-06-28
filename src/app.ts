@@ -49,10 +49,10 @@ function extractAndConvert<T extends object, U extends keyof T>(
   return obj[key];
 }
 
-const aa = extractAndConvert({ name: "orvoki" }, "name");
+const aa = extractAndConvert({ name: "rose" }, "name");
 console.log("aa = ", aa);
 
 //keyof + generics can ensure that we don't make dumb mistakes
 //where we tried to call this function,
-const bb = extractAndConvert({ name: "Mikko" }, "age");
-console.log("bb = ", bb);
+// const bb = extractAndConvert({ name: "Mikko" }, "age");
+// console.log("bb = ", bb);
