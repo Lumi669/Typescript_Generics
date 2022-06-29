@@ -56,3 +56,62 @@ console.log("aa = ", aa);
 //where we tried to call this function,
 // const bb = extractAndConvert({ name: "Mikko" }, "age");
 // console.log("bb = ", bb);
+
+//Generic Classes
+class DataStorage<T> {
+  private data: T[] = [];
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
+  }
+}
+
+//set T to string
+const textStorage = new DataStorage<string>();
+textStorage.addItem("apple");
+textStorage.addItem("book");
+console.log("textStorage = ", textStorage.getItems());
+
+textStorage.removeItem("apple");
+console.log("textStorage after removing apple = ", textStorage.getItems());
+textStorage.removeItem("book");
+console.log(
+  "textStorage after removing apple and book = ",
+  textStorage.getItems()
+);
+
+//set T to number
+const numberStorage = new DataStorage<number>();
+
+//set T to boolean
+const boolStorage = new DataStorage<boolean>();
+boolStorage.addItem(true);
+boolStorage.addItem(false);
+boolStorage.addItem(true);
+console.log("boolStorage = ", boolStorage.getItems());
+boolStorage.removeItem(false);
+console.log("boolStorage after reomve false = ", boolStorage.getItems());
+boolStorage.removeItem(true);
+console.log(
+  "boolStorage after reomve false and one true = ",
+  boolStorage.getItems()
+);
+
+//set T to union type
+const mixedStorage = new DataStorage<string | number>();
+
+//set T to object type
+const objStore = new DataStorage();
+objStore.addItem({ name: "rose" });
+objStore.addItem({ name: "ben" });
+
+console.log("objStore = ", objStore);
+objStore.removeItem({ name: "rose" });
+console.log("objStore after remove rose = ", objStore);
