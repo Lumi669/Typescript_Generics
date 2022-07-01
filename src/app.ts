@@ -58,7 +58,7 @@ console.log("aa = ", aa);
 // console.log("bb = ", bb);
 
 //Generic Classes
-class DataStorage<T> {
+class DataStorage<T extends string | number | boolean> {
   private data: T[] = [];
   addItem(item: T) {
     this.data.push(item);
@@ -78,16 +78,16 @@ class DataStorage<T> {
 
 //set T to object
 
-const objStore = new DataStorage<object>();
+//const objStore = new DataStorage<object>();
 
-const rosey = { name: "rosey" };
-objStore.addItem(rosey);
-objStore.addItem({ name: "ben" });
+// const rosey = { name: "rosey" };
+// objStore.addItem(rosey);
+// objStore.addItem({ name: "ben" });
 
-console.log("objStore = ", objStore.getItems());
+// console.log("objStore = ", objStore.getItems());
 
-objStore.removeItem(rosey);
-console.log("objStore after removing rose = ", objStore.getItems());
+// objStore.removeItem(rosey);
+// console.log("objStore after removing rose = ", objStore.getItems());
 
 // //set T to string
 // const textStorage = new DataStorage<string>();
@@ -131,3 +131,29 @@ console.log("objStore after removing rose = ", objStore.getItems());
 // console.log("objStore = ", objStore);
 // objStore.removeItem({ name: "rose" });
 // console.log("objStore after remove rose = ", objStore);
+
+//Demonstration of Generic Utility Types
+//Partial
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoas(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return <CourseGoal>courseGoal;
+}
+
+const newTeacher22 = createCourseGoas(
+  "assitence",
+  "a good teacher",
+  new Date("2022-6-6")
+);

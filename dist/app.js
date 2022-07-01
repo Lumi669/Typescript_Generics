@@ -38,11 +38,12 @@ class DataStorage {
         return [...this.data];
     }
 }
-const objStore = new DataStorage();
-const rosey = { name: "rosey" };
-objStore.addItem(rosey);
-objStore.addItem({ name: "ben" });
-console.log("objStore = ", objStore.getItems());
-objStore.removeItem(rosey);
-console.log("objStore after removing rose = ", objStore.getItems());
+function createCourseGoas(title, description, date) {
+    let courseGoal = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal;
+}
+const newTeacher22 = createCourseGoas("assitence", "a good teacher", new Date("2022-6-6"));
 //# sourceMappingURL=app.js.map
