@@ -157,3 +157,10 @@ const newTeacher22 = createCourseGoas(
   "a good teacher",
   new Date("2022-6-6")
 );
+
+//note the difference between const and Readonly
+//Readonly<Type> is to create a readonly type, it is a generic utility
+//whereas readony is to make a property as read-only in the class, type or interface
+const names: Readonly<string[]> = ["anna", "rose"];
+names.push("ben");
+console.log("names array = ", names);

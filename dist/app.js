@@ -46,4 +46,7 @@ function createCourseGoas(title, description, date) {
     return courseGoal;
 }
 const newTeacher22 = createCourseGoas("assitence", "a good teacher", new Date("2022-6-6"));
+const names = ["anna", "rose"];
+names.push("ben");
+console.log("names array = ", names);
 //# sourceMappingURL=app.js.map
