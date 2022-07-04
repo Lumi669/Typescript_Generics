@@ -15,42 +15,42 @@
 
 //demonstration generic function
 
-//add generic constraints
-function merge<T extends object, U extends object>(objA: T, objB: U) {
-  return Object.assign(objA, objB);
-}
-const mergedObj = merge({ name: "rose" }, { age: 6 });
-console.log("mergedObj = ", mergedObj);
+// //add generic constraints
+// function merge<T extends object, U extends object>(objA: T, objB: U) {
+//   return Object.assign(objA, objB);
+// }
+// const mergedObj = merge({ name: "rose" }, { age: 6 });
+// console.log("mergedObj = ", mergedObj);
 
-//another generic function
-interface Lengthy {
-  length: number;
-}
+// //another generic function
+// interface Lengthy {
+//   length: number;
+// }
 
-//set specificlly the return type to a tuple and its two element types
-function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
-  let descriptionText = "Got no value";
-  if (element.length === 1) {
-    descriptionText = "Got 1 element.";
-  } else if (element.length > 1) {
-    descriptionText = `Got ${element.length} elements.`;
-  }
-  return [element, descriptionText];
-}
+// //set specificlly the return type to a tuple and its two element types
+// function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+//   let descriptionText = "Got no value";
+//   if (element.length === 1) {
+//     descriptionText = "Got 1 element.";
+//   } else if (element.length > 1) {
+//     descriptionText = `Got ${element.length} elements.`;
+//   }
+//   return [element, descriptionText];
+// }
 
-console.log(countAndDescribe("hello rose")); //["hello rose", "Got 10 elements."]
-console.log(countAndDescribe([2, 1, 4, 5, 6])); //[[2, 1, 4, 5, 6], "Got 5 elements."]
+// console.log(countAndDescribe("hello rose")); //["hello rose", "Got 10 elements."]
+// console.log(countAndDescribe([2, 1, 4, 5, 6])); //[[2, 1, 4, 5, 6], "Got 5 elements."]
 
-//keyof constraint in generic function
-function extractAndConvert<T extends object, U extends keyof T>(
-  obj: T,
-  key: U
-) {
-  return obj[key];
-}
+// //keyof constraint in generic function
+// function extractAndConvert<T extends object, U extends keyof T>(
+//   obj: T,
+//   key: U
+// ) {
+//   return obj[key];
+// }
 
-const aa = extractAndConvert({ name: "rose" }, "name");
-console.log("aa = ", aa);
+// const aa = extractAndConvert({ name: "rose" }, "name");
+// console.log("aa = ", aa);
 
 //keyof + generics can ensure that we don't make dumb mistakes
 //where we tried to call this function,
@@ -58,13 +58,36 @@ console.log("aa = ", aa);
 // console.log("bb = ", bb);
 
 //Generic Classes
-class DataStorage<T extends string | number | boolean> {
-  private data: T[] = [];
-  addItem(item: T) {
+// class DataStorage<T extends string | number | boolean> {
+//   private data: T[] = [];
+//   addItem(item: T) {
+//     this.data.push(item);
+//   }
+
+//   removeItem(item: T) {
+//     if (this.data.indexOf(item) === -1) {
+//       return;
+//     }
+//     this.data.splice(this.data.indexOf(item), 1);
+//   }
+
+//   getItems() {
+//     return [...this.data];
+//   }
+// }
+
+//union type used in a class
+//Eventhough line82 is fine, but Line85 and Line89 Line92 show error
+//so, we should use generic class, if we want the data type to be
+//either only string type, or only number type
+class DataStorage {
+  private data: string[] | number[] | boolean[] = [];
+
+  addItem(item: string | number | boolean) {
     this.data.push(item);
   }
 
-  removeItem(item: T) {
+  removeItem(item: string | number | boolean) {
     if (this.data.indexOf(item) === -1) {
       return;
     }
@@ -76,24 +99,11 @@ class DataStorage<T extends string | number | boolean> {
   }
 }
 
-//set T to object
-
-//const objStore = new DataStorage<object>();
-
-// const rosey = { name: "rosey" };
-// objStore.addItem(rosey);
-// objStore.addItem({ name: "ben" });
-
-// console.log("objStore = ", objStore.getItems());
-
-// objStore.removeItem(rosey);
-// console.log("objStore after removing rose = ", objStore.getItems());
-
-// //set T to string
-// const textStorage = new DataStorage<string>();
-// textStorage.addItem("apple");
-// textStorage.addItem("book");
-// console.log("textStorage = ", textStorage.getItems());
+//set T to string
+const textStorage = new DataStorage();
+textStorage.addItem("apple");
+textStorage.addItem(6);
+console.log("textStorage = ", textStorage.getItems());
 
 // textStorage.removeItem("apple");
 // console.log("textStorage after removing apple = ", textStorage.getItems());
@@ -120,6 +130,19 @@ class DataStorage<T extends string | number | boolean> {
 //   boolStorage.getItems()
 // );
 
+//set T to object
+
+//const objStore = new DataStorage<object>();
+
+// const rosey = { name: "rosey" };
+// objStore.addItem(rosey);
+// objStore.addItem({ name: "ben" });
+
+// console.log("objStore = ", objStore.getItems());
+
+// objStore.removeItem(rosey);
+// console.log("objStore after removing rose = ", objStore.getItems());
+
 // //set T to union type
 // const mixedStorage = new DataStorage<string | number>();
 
@@ -134,33 +157,33 @@ class DataStorage<T extends string | number | boolean> {
 
 //Demonstration of Generic Utility Types
 //Partial
-interface CourseGoal {
-  title: string;
-  description: string;
-  completeUntil: Date;
-}
+// interface CourseGoal {
+//   title: string;
+//   description: string;
+//   completeUntil: Date;
+// }
 
-function createCourseGoas(
-  title: string,
-  description: string,
-  date: Date
-): CourseGoal {
-  let courseGoal: Partial<CourseGoal> = {};
-  courseGoal.title = title;
-  courseGoal.description = description;
-  courseGoal.completeUntil = date;
-  return <CourseGoal>courseGoal;
-}
+// function createCourseGoas(
+//   title: string,
+//   description: string,
+//   date: Date
+// ): CourseGoal {
+//   let courseGoal: Partial<CourseGoal> = {};
+//   courseGoal.title = title;
+//   courseGoal.description = description;
+//   courseGoal.completeUntil = date;
+//   return <CourseGoal>courseGoal;
+// }
 
-const newTeacher22 = createCourseGoas(
-  "assitence",
-  "a good teacher",
-  new Date("2022-6-6")
-);
+// const newTeacher22 = createCourseGoas(
+//   "assitence",
+//   "a good teacher",
+//   new Date("2022-6-6")
+// );
 
 //note the difference between const and Readonly
 //Readonly<Type> is to create a readonly type, it is a generic utility
 //whereas readony is to make a property as read-only in the class, type or interface
-const names: Readonly<string[]> = ["anna", "rose"];
-names.push("ben");
-console.log("names array = ", names);
+// const names: Readonly<string[]> = ["anna", "rose"];
+// //names.push("ben");
+// console.log("names array = ", names);
